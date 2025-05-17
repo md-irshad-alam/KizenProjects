@@ -56,6 +56,15 @@ Built with:
 
 > All routes are protected except auth and create-lead (public route).
 
+## Scrrenshot
+
+    #Auth Page
+    ![alt text](image.png)
+    #Dashboard
+    ![alt text](image-1.png)
+    ![alt text](image-2.png)
+    ![alt text](image-3.png)
+
 ---
 
 ## 📁 Folder Structure

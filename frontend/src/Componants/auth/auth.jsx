@@ -55,13 +55,13 @@ export default function AuthPage() {
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100 p-4 gap-x-4">
-      <Card className="sm:w-[95%] lg:w-[400px]">
+      <Card className="w-full lg:w-[30%] md:w-[30%]  ">
         <Typography variant="h5" className="mb-4 text-center">
           {isLogin ? "Login" : "Sign Up"}
         </Typography>
         <form
           onSubmit={handleSubmit}
-          className="flex items-center flex-col gap-y-4 p-4"
+          className=" w-full flex items-center flex-col gap-y-4 p-4"
         >
           {!isLogin && (
             <TextField
