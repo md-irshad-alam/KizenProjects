@@ -31,12 +31,33 @@ const BarChart = ({ data }) => {
       {
         label: "Leads by Source",
         data: counts,
-        backgroundColor: "#3b82f6",
+        backgroundColor: [
+          "rgba(66, 153, 225, 0.7)", // Facebook - Sky Blue
+          "rgba(134, 239, 172, 0.7)", // Instagram - Mint Green
+          "rgba(251, 146, 60, 0.7)", // Google Ads - Amber
+          "rgba(167, 137, 250, 0.7)", // Email - Violet
+          "rgba(148, 163, 184, 0.7)", // Others - Gray
+        ],
+
+        borderWidth: 1,
       },
     ],
   };
 
-  return <Bar data={chartData} />;
+  const options = {
+    responsive: true,
+    plugins: {
+      title: {
+        display: false, // ✅ Hides the top label
+      },
+      legend: {
+        // position: "bottom", // Optional: keep legend
+        display: false,
+      },
+    },
+  };
+
+  return <Bar data={chartData} options={options} />;
 };
 
 export default BarChart;

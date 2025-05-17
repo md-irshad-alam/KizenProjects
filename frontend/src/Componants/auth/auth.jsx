@@ -44,6 +44,9 @@ export default function AuthPage() {
         .post("/auth/login", form)
         .then((res) => {
           window.alert("Login successfull");
+          const expiryTime = new Date().getTime() + 60 * 60 * 1000; // 1 hour in milliseconds
+
+          sessionStorage.setItem("expiry", expiryTime);
           sessionStorage.setItem("token", res.data.token);
           navigate("/dashboard");
         })

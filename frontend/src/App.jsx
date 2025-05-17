@@ -1,34 +1,30 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 import AuthPage from "./Componants/auth/auth";
 import Dashboard from "./Componants/dashboard";
-import Dashboard2 from "./Componants/NewDashboard";
 import Navbar from "./Componants/navbar";
 import apiclient from "./utils/apiclint";
-import { useState, useEffect } from "react";
-import { Navigate } from "react-router-dom";
-
 import LeadForm from "./Componants/LeedGenerations/productPage";
+import ProtectedRoute from "./utils/protechroutes";
+import useTokenExpiry from "./utils/tokenExpire";
 
 function App() {
-  const [profile, setProfile] = useState("");
+  const [profile, setProfile] = useState(null);
+  const token = sessionStorage.getItem("token");
+  useTokenExpiry();
   useEffect(() => {
-    apiclient
-      .get("/auth/profile")
-      .then((res) => setProfile(res.data))
-      .catch((error) => {
-        console.log(error);
-        setProfile(null);
-      });
-  }, []);
-
-  // ProtectedRoute component
-  function ProtectedRoute({ children }) {
-    if (profile === "") return null; // or a loading spinner
-    if (!profile) return <Navigate to="/login" replace />;
-    return children;
-  }
+    if (token) {
+      apiclient
+        .get("/auth/profile")
+        .then((res) => setProfile(res.data))
+        .catch(() => {
+          setProfile(null);
+          sessionStorage.removeItem("token");
+          sessionStorage.removeItem("expiry");
+        });
+    }
+  }, [token]);
 
   return (
     <div>
@@ -38,12 +34,15 @@ function App() {
         <Route
           path="/dashboard"
           element={
-            <ProtectedRoute>
-              <Dashboard />
-            </ProtectedRoute>
+            <ProtectedRoute element={Dashboard} isAuthenticated={!!token} />
           }
         />
-        <Route path="/lead-generate" element={<LeadForm />} />
+        <Route
+          path="/lead-generate"
+          element={
+            <ProtectedRoute element={LeadForm} isAuthenticated={!!token} />
+          }
+        />
       </Routes>
     </div>
   );

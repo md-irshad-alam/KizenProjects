@@ -47,7 +47,11 @@ const LeadForm = () => {
   };
 
   return (
-    <Container maxWidth="sm" sx={{ mt: 4 }}>
+    <Container
+      maxWidth="sm"
+      sx={{ mt: 4 }}
+      className=" absolute top-25 left-0 right-0"
+    >
       <Box
         component="form"
         onSubmit={handleSubmit}

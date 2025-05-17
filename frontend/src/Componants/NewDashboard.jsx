@@ -1,7 +1,6 @@
 import React from "react";
 import LineChart from "./chats/line";
 import BarChart from "./chats/bar";
-import DonutChart from "./chats/DonutChart";
 
 function Dashboard2() {
   return (

@@ -1,7 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-import apiclient from "../utils/apiclint";
-import UserProfile from "./UserProfile";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const Navbar = ({ profile }) => {
@@ -10,32 +7,35 @@ const Navbar = ({ profile }) => {
   const handleLogout = () => {
     sessionStorage.clear("token");
   };
-  console.log(profile);
+
+  const navItem = [
+    { label: "Dashboard", url: "/dashboard" },
+    { label: "Reports", url: "/reports" },
+    { label: "Lead Generate", url: "/lead-generate" },
+  ];
+
   return (
-    <nav className="bg-white shadow-md">
-      <div className="max-w-full mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
+    <nav className="bg-white shadow-md fixed top-0 w-full z-50 transition duration-300 ease-in-out">
+      <div className="  border-b-violet-600 max-w-full mx-auto px-4 sm:px-6 lg:px-8 p-2">
+        <div className="flex justify-between items-center h-16">
           {/* Logo & Brand */}
-          <div className="flex items-center">
-            <div className="text-xl font-bold text-blue-600">
+          <div className="flex items-center space-x-2">
+            <div className="text-xl font-bold text-blue-600 hover:text-blue-700 cursor-pointer transition duration-300">
               Kaizen Dashboard
             </div>
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link to="/dashboard" className="text-gray-700 hover:text-blue-600">
-              Dashboard
-            </Link>
-            <Link to="/reports" className="text-gray-700 hover:text-blue-600">
-              Reports
-            </Link>
-            <Link
-              to="/lead-generate"
-              className="text-gray-700 hover:text-blue-600"
-            >
-              Lead Generate
-            </Link>
+          <div className="hidden md:flex items-center space-x-6">
+            {navItem.map((item, index) => (
+              <Link
+                key={index}
+                to={item.url}
+                className="text-gray-700 hover:text-white hover:bg-blue-600 transition-all duration-300 ease-in-out px-4 py-2 rounded-lg transform hover:scale-105 hover:shadow-lg"
+              >
+                {item.label}
+              </Link>
+            ))}
 
             {/* Profile Dropdown */}
             <div className="relative group">
@@ -53,23 +53,23 @@ const Navbar = ({ profile }) => {
                   )}
                 </span>
                 <img
-                  className="h-8 w-8 rounded-full"
+                  className="h-8 w-8 rounded-full border-2 border-gray-300 hover:border-blue-600 transition duration-300"
                   src="https://i.pravatar.cc/150"
                   alt="Profile"
                 />
               </button>
 
               {/* Dropdown Menu */}
-              <div className="absolute right-0 mt-0 w-40 bg-white rounded-md shadow-lg py-2 z-10 hidden group-hover:block">
+              <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg py-2 z-10 opacity-0 group-hover:opacity-100 transition duration-300 transform scale-95 group-hover:scale-100">
                 <Link
                   to="/profile"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition duration-200"
                 >
                   Profile
                 </Link>
                 <Link
                   to="/login"
-                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition duration-200"
                   onClick={handleLogout}
                 >
                   Logout
@@ -84,7 +84,6 @@ const Navbar = ({ profile }) => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="text-gray-700 focus:outline-none"
             >
-              {/* Hamburger Icon */}
               <svg
                 className="w-6 h-6"
                 fill="none"
@@ -115,33 +114,20 @@ const Navbar = ({ profile }) => {
 
       {/* Mobile Menu */}
       {isMenuOpen && (
-        <div className="md:hidden bg-white shadow-md">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link
-              href="/dashboard"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
+        <div className="md:hidden bg-white shadow-md transition-all duration-300 ease-in-out transform">
+          {navItem.map((item, index) => (
+            <div
+              key={index}
+              className="px-2 pt-2 pb-3 space-y-1 sm:px-3 hover:bg-blue-600 hover:scale-105 hover:shadow-lg transition-all duration-300 ease-in-out rounded-lg"
             >
-              Dashboard
-            </Link>
-
-            <Link
-              href="/settings"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
-            ></Link>
-            <Link
-              href="/profile"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-gray-100"
-            >
-              Profile
-            </Link>
-            <Link
-              to="/login"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-              onClick={handleLogout}
-            >
-              Logout
-            </Link>
-          </div>
+              <Link
+                to={item.url}
+                className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-white transition-all duration-300 ease-in-out"
+              >
+                {item.label}
+              </Link>
+            </div>
+          ))}
         </div>
       )}
     </nav>
