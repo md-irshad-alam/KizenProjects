@@ -59,11 +59,13 @@ Built with:
 ## Scrrenshot
 
     #Auth Page
-    ![alt text](image.png)
+    ![image](https://github.com/user-attachments/assets/3a349a73-fecd-4f91-833a-01e57737604c)
+
     #Dashboard
-    ![alt text](image-1.png)
-    ![alt text](image-2.png)
-    ![alt text](image-3.png)
+   ![image](https://github.com/user-attachments/assets/63c206ac-dda8-4410-8d57-914732d48c24)
+
+   ![image](https://github.com/user-attachments/assets/a1f55ac0-0b7a-4eca-bd8e-f44b45ca12e4)
+
 
 ---
 
