@@ -4,7 +4,7 @@ const BarChart = React.lazy(() => import("./chats/bar"));
 
 import apiclient from "../utils/apiclint";
 import Sidebar from "./sidebar/sidebar";
-import { Input, InputLabel, Table, TableHead } from "@mui/material";
+import { Input, InputLabel, Paper, Table, TableHead } from "@mui/material";
 import LeadTableInfo from "./pages/tableChart";
 // import PolarAreaChart from "./chats/polarAreachart";
 const PolarAreaChart = React.lazy(() => import("./chats/polarareachart"));
@@ -50,85 +50,88 @@ function Dashboard() {
       {/* Sidebar */}
       <Sidebar setSelectedItem={setSelectedSidebarItem} />
       {/* Main Content */}
+
       <div className=" block w-full lg:w-[80%]   m-auto ml-4 absolute top-25 right-6">
-        <h1 className="text-2xl font-bold mb-6">
-          Lead Generation Dashboard For :{" "}
-          <span className="text-blue-300 font-bold text-2xl">
-            {selectedSidebarItem}
-          </span>
-        </h1>
+        <Paper className="p-4">
+          <h1 className="text-2xl font-bold mb-6">
+            Lead Generation Dashboard For :{" "}
+            <span className="text-blue-300 font-bold text-2xl">
+              {selectedSidebarItem}
+            </span>
+          </h1>
 
-        {/* KPI Cards */}
-        <div className=" grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-          <div className="bg-white p-4 rounded shadow">
-            <h2 className="text-lg">Total Leads</h2>
-            <p className="text-2xl">{filteredLeads.length}</p>
-          </div>
-          <div className="bg-white p-4 rounded shadow">
-            <h2 className="text-lg">Conversion Rate</h2>
-            <p className="text-2xl">4.6%</p>
-          </div>
-          <div className="bg-white p-4 rounded shadow">
-            <h2 className="text-lg">Budget Spent</h2>
-            <p className="text-2xl">$12,450</p>
-          </div>
-          <div className="bg-white p-4 rounded shadow">
-            <h2 className="text-lg">High-Quality Leads</h2>
-            <p className="text-2xl">
-              {filteredLeads.filter((l) => l.score > 80).length}
-            </p>
-          </div>
-        </div>
-        {/* Filters */}
-        <div className="grid md:grid-cols-2 gap-4 mb-6">
-          <div className="w-full">
-            <InputLabel>Start Date</InputLabel>
-            <Input
-              name="startDate"
-              type="date"
-              fullWidth
-              onChange={handleChange}
-              className="border p-2"
-              value={filters.startDate}
-            />
-          </div>
-          <div>
-            <InputLabel>End Date</InputLabel>
-            <Input
-              name="endDate"
-              type="date"
-              fullWidth
-              onChange={handleChange}
-              className="border p-2"
-              value={filters.endDate}
-            />
-          </div>
-        </div>
-
-        {/* Charts */}
-        <div className="grid lg:grid-cols-2 gap-6 mb-6">
-          <div className="bg-white p-4 rounded shadow">
-            <LineChart data={filteredLeads} source={selectedSidebarItem} />
-          </div>
-          <div className="bg-white p-4 rounded shadow">
-            <BarChart data={filteredLeads} />
-          </div>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-6 w-full">
-          <div className="bg-white p-4 rounded shadow w-[100%] max-h-[400px]  m-auto ">
-            <PolarAreaChart data={filteredLeads} />
-          </div>
-
-          {/* Leads Table */}
-          <div className="bg-white p-4 rounded shadow">
-            <h3 className="font-semibold mb-2">Recent Leads</h3>
-            <div className="w-[100%] m-auto">
-              {" "}
-              <LeadTableInfo rowData={filteredLeads} />{" "}
+          {/* KPI Cards */}
+          <div className=" grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+            <div className="bg-white p-4 rounded shadow">
+              <h2 className="text-lg">Total Leads</h2>
+              <p className="text-2xl">{filteredLeads.length}</p>
+            </div>
+            <div className="bg-white p-4 rounded shadow">
+              <h2 className="text-lg">Conversion Rate</h2>
+              <p className="text-2xl">4.6%</p>
+            </div>
+            <div className="bg-white p-4 rounded shadow">
+              <h2 className="text-lg">Budget Spent</h2>
+              <p className="text-2xl">$12,450</p>
+            </div>
+            <div className="bg-white p-4 rounded shadow">
+              <h2 className="text-lg">High-Quality Leads</h2>
+              <p className="text-2xl">
+                {filteredLeads.filter((l) => l.score > 80).length}
+              </p>
             </div>
           </div>
-        </div>
+          {/* Filters */}
+          {/* <div className="grid md:grid-cols-2 gap-4 mb-6">
+            <div className="w-full">
+              <InputLabel>Start Date</InputLabel>
+              <Input
+                name="startDate"
+                type="date"
+                fullWidth
+                onChange={handleChange}
+                className="border p-2"
+                value={filters.startDate}
+              />
+            </div>
+            <div>
+              <InputLabel>End Date</InputLabel>
+              <Input
+                name="endDate"
+                type="date"
+                fullWidth
+                onChange={handleChange}
+                className="border p-2"
+                value={filters.endDate}
+              />
+            </div>
+          </div> */}
+
+          {/* Charts */}
+          <div className="grid lg:grid-cols-2 gap-6 mb-6">
+            <div className="bg-white p-4 rounded shadow">
+              <LineChart data={filteredLeads} source={selectedSidebarItem} />
+            </div>
+            <div className="bg-white p-4 rounded shadow">
+              <BarChart data={filteredLeads} />
+            </div>
+          </div>
+
+          <div className="grid lg:grid-cols-2 gap-6 w-full">
+            <div className="bg-white p-4 rounded shadow w-[100%] max-h-[400px]  m-auto ">
+              <PolarAreaChart data={filteredLeads} />
+            </div>
+
+            {/* Leads Table */}
+            <div className="bg-white p-4 rounded shadow">
+              <h3 className="font-semibold mb-2">Recent Leads</h3>
+              <div className="w-[100%] m-auto">
+                {" "}
+                <LeadTableInfo rowData={filteredLeads} />{" "}
+              </div>
+            </div>
+          </div>
+        </Paper>
       </div>
     </div>
   );
