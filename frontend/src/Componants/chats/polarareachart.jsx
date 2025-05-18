@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { PolarArea } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -7,7 +7,6 @@ import {
   Legend,
   RadialLinearScale,
 } from "chart.js";
-import ChartWrapper from "../../utils/chartwraper";
 
 ChartJS.register(ArcElement, Tooltip, Legend, RadialLinearScale);
 

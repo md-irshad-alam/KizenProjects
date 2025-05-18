@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
-import LineChart from "./chats/line";
-import BarChart from "./chats/bar";
+
+const BarChart = React.lazy(() => import("./chats/bar"));
 
 import apiclient from "../utils/apiclint";
 import Sidebar from "./sidebar/sidebar";
 import { Input, InputLabel, Table, TableHead } from "@mui/material";
 import LeadTableInfo from "./pages/tableChart";
-import PolarAreaChart from "./chats/polarAreachart";
+// import PolarAreaChart from "./chats/polarAreachart";
+const PolarAreaChart = React.lazy(() => import("./chats/polarareachart"));
+const LineChart = React.lazy(() => import("./chats/line"));
 
 function Dashboard() {
   const [leads, setLeads] = useState([]);
