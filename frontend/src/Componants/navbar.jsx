@@ -10,7 +10,6 @@ const Navbar = ({ profile }) => {
 
   const navItem = [
     { label: "Dashboard", url: "/dashboard" },
-    { label: "Reports", url: "/reports" },
     { label: "Lead Generate", url: "/lead-generate" },
   ];
 

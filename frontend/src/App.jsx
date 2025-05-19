@@ -8,6 +8,7 @@ import apiclient from "./utils/apiclint";
 import LeadForm from "./Componants/LeedGenerations/productPage";
 import ProtectedRoute from "./utils/protechroutes";
 import useTokenExpiry from "./utils/tokenExpire";
+import UserProfile from "./Componants/UserProfile";
 
 function App() {
   const [profile, setProfile] = useState(null);
@@ -41,6 +42,12 @@ function App() {
           path="/lead-generate"
           element={
             <ProtectedRoute element={LeadForm} isAuthenticated={!!token} />
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute element={UserProfile} isAuthenticated={!!token} />
           }
         />
       </Routes>

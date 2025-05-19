@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 
 const useTokenExpiry = () => {
   const navigate = useNavigate();
-
   useEffect(() => {
     const checkTokenExpiry = () => {
       const expiryTime = sessionStorage.getItem("expiry");

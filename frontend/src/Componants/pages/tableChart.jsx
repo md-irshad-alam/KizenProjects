@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 
 export default function LeadTableInfo({ rowData }) {
   return (
-    <TableContainer className="max-h-[400px] overflow-x-scroll">
+    <TableContainer className="max-h-[330px] overflow-x-scroll">
       <Table stickyHeader aria-label="sticky table">
         <TableHead>
           <TableRow>
@@ -19,7 +19,7 @@ export default function LeadTableInfo({ rowData }) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {rowData.slice(0, 5).map((l, i) => (
+          {rowData?.map((l, i) => (
             <TableRow hover tabIndex={-1} key={i}>
               <TableCell component="th" scope="row">
                 {l.name}
